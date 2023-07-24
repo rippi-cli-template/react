@@ -15,7 +15,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', 'jsx'],
     alias: {
       '@': path.resolve('src'),
     },
@@ -24,11 +24,25 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(ts|tsx)$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-react',
+              '@babel/preset-typescript',
+            ],
+          },
+        },
+      },
+      {
         test: /\.(js|jsx)$/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-react'],
+            presets: [
+              '@babel/preset-react',
+            ],
           },
         },
       },
